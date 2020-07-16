@@ -77,6 +77,8 @@ function Settings({ settings, setSettings }) {
                 name="pomodoro"
                 value={settings.pomodoro}
                 type="number"
+                min="10"
+                max="60"
               />
             </div>
             <div>
@@ -86,6 +88,8 @@ function Settings({ settings, setSettings }) {
                 name="short"
                 value={settings.short}
                 type="number"
+                min="1"
+                max="20"
               />
             </div>
             <div>
@@ -95,6 +99,8 @@ function Settings({ settings, setSettings }) {
                 name="long"
                 value={settings.long}
                 type="number"
+                min="5"
+                max="30"
               />
             </div>
             <div>

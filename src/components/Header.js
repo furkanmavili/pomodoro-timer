@@ -4,11 +4,13 @@ import Settings from "./Settings";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 90%;
   margin: 0 auto 2em auto;
   align-items: center;
+  @media screen and (min-width: 1000px) {
+    width: 60%;
+  }
   @media screen and (max-width: 700px) {
-    width: 100%;
     h1 {
       font-size: 1.5rem;
     }

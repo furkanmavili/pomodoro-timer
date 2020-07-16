@@ -14,14 +14,13 @@ const Container = styled.div`
   flex-direction: column;
   width: 50%;
   height: 100vh;
-  // justify-content: center;
   align-items: center;
   margin: 0 auto;
   @media screen and (max-width: 1350px) {
     width: 70%;
   }
   @media screen and (max-width: 535px) {
-    width: 100%;
+    width: 90%;
   }
 `;
 
