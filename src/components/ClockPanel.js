@@ -17,7 +17,6 @@ const Container = styled.div`
   align-items: center;
   background-color: #ec9b87;
   overflow: hidden;
-  justify-items: center;
   @media screen and (max-width: 1350px) {
     width: 100%;
   }

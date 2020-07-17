@@ -5,11 +5,13 @@ import buttonSound from "../sounds/button.mp3";
 const Button = styled.button`
   display: inline-block;
   padding: 0.5em 1em;
-  border: 2px solid white;
+  border: 2px solid lightgrey;
   border-radius: 8px;
   color: #000;
-  background-color: inherit;
+  background-color: #fff;
   font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
   cursor: pointer;
   &:active {
     -ms-transform: translateY(4px);

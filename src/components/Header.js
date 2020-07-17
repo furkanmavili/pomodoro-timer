@@ -33,6 +33,7 @@ const Container = styled.div`
     color: #fff;
     padding: 5px 10px;
     font-size: 1rem;
+    font-weight: bold;
     &:hover {
       background-color: #ea907a;
     }

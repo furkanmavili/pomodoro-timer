@@ -12,6 +12,7 @@ const Container = styled.div`
     margin: 0 1em;
     padding: 10px 20px;
     font-size: 1rem;
+    font-weight: bold;
     text-align: center;
     cursor: pointer;
     outline: none;
