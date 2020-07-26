@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import useSound from "use-sound";
 import buttonSound from "../sounds/button.mp3";
+
 const Button = styled.button`
   display: inline-block;
   padding: 0.5em 1em;

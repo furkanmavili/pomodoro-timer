@@ -7,7 +7,7 @@ import Social from "./components/Social";
 import DancingDoodle from "./images/DancingDoodle.svg";
 import Reading from "./images/ReadingDoodle.svg";
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
 const Container = styled.div`
   display: flex;
