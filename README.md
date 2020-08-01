@@ -7,3 +7,4 @@ A simple timer for pomodoro technique.
 - Auto start option between sessions.
 - Editable session length.
 - Cool sounds
+- Material UI 
