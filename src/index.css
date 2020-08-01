@@ -17,28 +17,6 @@ code {
     monospace;
 }
 
-.active {
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-  background-color: #e5e5e5;
-}
-.ReactModal__Overlay {
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: all 500ms ease-in-out;
-}
-
-.ReactModal__Overlay--after-open {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-.ReactModal__Overlay--before-close {
-  opacity: 0;
-  transform: translateY(-100%);
-}
-@media screen and (max-width: 600px) {
-  html {
-    font-size: 12px;
-  }
+a {
+  color: inherit;
 }

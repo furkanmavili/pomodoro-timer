@@ -1,39 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-  ul {
-    padding-left: 0;
-    display: flex;
-    list-style: none;
-    justify-content: space-between;
-  }
-  button {
-    margin: 0 1em;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #000;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-
-    &:hover {
-      background-color: #f2f2f2;
-    }
-  }
-  @media screen and (max-width: 700px) {
-    button {
-      font-size: 1rem;
-      box-shadow: 0 5px #999;
-      margin: 0 0.6em;
-      padding: 5px 10px;
-    }
-  }
-`;
+import { Grid, Button } from "@material-ui/core";
 
 const ClockHeader = React.memo(function ClockHeader({
   changeMode,
@@ -42,36 +8,42 @@ const ClockHeader = React.memo(function ClockHeader({
   function handleClick(mode) {
     changeMode(mode);
   }
-
   return (
-    <Container>
-      <ul>
-        <li>
-          <button
-            className={currentMode === "pomodoro" ? "active" : ""}
-            onClick={() => handleClick("pomodoro")}
-          >
-            Pomodoro
-          </button>
-        </li>
-        <li>
-          <button
-            className={currentMode === "short" ? "active" : ""}
-            onClick={() => handleClick("short")}
-          >
-            Short Break
-          </button>
-        </li>
-        <li>
-          <button
-            className={currentMode === "long" ? "active" : ""}
-            onClick={() => handleClick("long")}
-          >
-            Long Break
-          </button>
-        </li>
-      </ul>
-    </Container>
+    <Grid container spacing={3}>
+      <Grid item xs={4}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleClick("pomodoro")}
+          size="large"
+          fullWidth
+        >
+          Pomodoro
+        </Button>
+      </Grid>
+      <Grid item xs={4}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleClick("short")}
+          size="large"
+          fullWidth
+        >
+          Short Break
+        </Button>
+      </Grid>
+      <Grid item xs={4}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleClick("long")}
+          size="large"
+          fullWidth
+        >
+          Long Break
+        </Button>
+      </Grid>
+    </Grid>
   );
 });
 

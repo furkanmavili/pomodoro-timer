@@ -1,42 +1,14 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
 import ClockPanel from "./components/ClockPanel";
-import styled from "styled-components";
-import Modal from "react-modal";
 import Social from "./components/Social";
+import Settings from "./components/Settings";
 import DancingDoodle from "./images/DancingDoodle.svg";
 import Reading from "./images/ReadingDoodle.svg";
+import { Grid, Hidden } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import classnames from "classnames";
 
-// Modal.setAppElement("#root");
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  height: 100vh;
-  align-items: center;
-  margin: 0 auto;
-  @media screen and (max-width: 1350px) {
-    width: 70%;
-  }
-  @media screen and (max-width: 535px) {
-    width: 90%;
-  }
-`;
-
-const Doodle = styled.div`
-  position: absolute;
-  top: 23%;
-  width: 300px;
-  height: 300px;
-  transition: opacity 0.5s ease-in-out;
-  left: ${({ position }) => (position === "left" ? "150px" : "")};
-  right: ${({ position }) => (position === "right" ? "150px" : "")};
-  opacity: ${({ isActive }) => (isActive ? "1" : "0.3")};
-  @media screen and (max-width: 1340px) {
-    display: none;
-  }
-`;
 const initialSettings = {
   sound: true,
   autoStart: false,
@@ -45,33 +17,91 @@ const initialSettings = {
   long: 15,
 };
 
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: "#ff9a76",
+    minHeight: "100vh",
+  },
+  image: {
+    width: "350px",
+    display: "block",
+    margin: "0 auto",
+    transition: "opacity .4s ease-in-out",
+  },
+  passive: {
+    opacity: ".3",
+  },
+  header: {
+    marginTop: "4em",
+  },
+  clock: {
+    paddingTop: "5em",
+  },
+  settings: {
+    marginTop: "4em",
+  },
+  social: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+  },
+});
+
 function App() {
   const [activeMode, setActiveMode] = useState("pomodoro");
   const [settings, setSettings] = useState(initialSettings);
+
+  const classes = useStyles();
   return (
-    <div style={{ backgroundColor: "#ea907a" }}>
-      <Doodle
-        isActive={activeMode === "pomodoro" ? true : false}
-        position={"left"}
-      >
-        <img src={Reading} alt="coffee doodle" />
-      </Doodle>
-      <Doodle
-        isActive={activeMode === "pomodoro" ? false : true}
-        position={"right"}
-      >
-        <img src={DancingDoodle} alt="coffee doodle" />
-      </Doodle>
-      <Container>
+    <Grid
+      container
+      className={classes.root}
+      alignContent="flex-start"
+      justify="center"
+    >
+      <Grid xs={12} item align="center" className={classes.header}>
         <Header settings={settings} setSettings={setSettings} />
-        <ClockPanel
-          settings={settings}
-          activeMode={activeMode}
-          changeMode={setActiveMode}
-        />
-      </Container>
-      <Social />
-    </div>
+      </Grid>
+      <Grid className={classes.clock} item container sm={12} justify="center">
+        <Hidden smDown>
+          <Grid item md={4}>
+            <img
+              className={classnames(
+                classes.image,
+                activeMode === "pomodoro" ? "" : classes.passive
+              )}
+              src={Reading}
+              alt="reading doogle"
+            />
+          </Grid>
+        </Hidden>
+        <Grid item xs={10} sm={8} md={4}>
+          <ClockPanel
+            settings={settings}
+            activeMode={activeMode}
+            changeMode={setActiveMode}
+          />
+        </Grid>
+        <Hidden smDown>
+          <Grid item sm={0} md={4}>
+            <img
+              className={classnames(
+                classes.image,
+                activeMode === "pomodoro" ? classes.passive : ""
+              )}
+              src={DancingDoodle}
+              alt="dancing doogle"
+            />
+          </Grid>
+        </Hidden>
+      </Grid>
+      <div className={classes.settings}>
+        <Settings settings={settings} setSettings={setSettings} />
+      </div>
+      <div className={classes.social}>
+        <Social />
+      </div>
+    </Grid>
   );
 }
 
