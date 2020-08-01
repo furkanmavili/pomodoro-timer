@@ -75,7 +75,7 @@ function ClockPanel({ activeMode, changeMode, settings }) {
         }
       }
     },
-    isRunning ? 100 : null
+    isRunning ? 1000 : null
   );
 
   return (
