@@ -1,7 +1,7 @@
 import React from "react";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import TwitterIcon from "@material-ui/icons/Twitter";
-import { ButtonGroup, Icon, IconButton } from "@material-ui/core";
+import { ButtonGroup, IconButton } from "@material-ui/core";
 function Social() {
   return (
     <ButtonGroup>

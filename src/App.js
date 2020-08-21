@@ -50,7 +50,6 @@ const useStyles = makeStyles({
 function App() {
   const [activeMode, setActiveMode] = useState("pomodoro");
   const [settings, setSettings] = useState(initialSettings);
-
   const classes = useStyles();
   return (
     <Grid
