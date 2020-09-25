@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./components/Header";
 import ClockPanel from "./components/ClockPanel";
 import Social from "./components/Social";
@@ -52,21 +52,22 @@ function App() {
   const [activeMode, setActiveMode] = useState("pomodoro");
   const [settings, setSettings] = useState(initialSettings);
   const classes = useStyles();
-  let deferredPrompt;
-  const addBtn = document.querySelector(".add-button");
-  addBtn.style.display = "none";
+  const addBtn = useRef();
+  addBtn.current.style.display = "none";
+
   useEffect(() => {
+    let deferredPrompt;
     window.addEventListener("beforeinstallprompt", (e) => {
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
       // Stash the event so it can be triggered later.
       deferredPrompt = e;
       // Update UI to notify the user they can add to home screen
-      addBtn.style.display = "block";
+      addBtn.current.style.display = "block";
 
-      addBtn.addEventListener("click", (e) => {
+      addBtn.current.addEventListener("click", (e) => {
         // hide our user interface that shows our A2HS button
-        addBtn.style.display = "none";
+        addBtn.current.style.display = "none";
         // Show the prompt
         deferredPrompt.prompt();
         // Wait for the user to respond to the prompt
@@ -132,7 +133,9 @@ function App() {
       <div className={classes.social}>
         <Social />
       </div>
-      <button class=".add-button">Add to home screen</button>
+      <button ref={addBtn} className=".add-button">
+        Add to home screen
+      </button>
     </Grid>
   );
 }
