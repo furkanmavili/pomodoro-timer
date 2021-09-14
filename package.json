@@ -16,7 +16,8 @@
     "react-icons": "^3.10.0",
     "react-modal": "^3.11.2",
     "react-scripts": "3.4.1",
-    "use-sound": "^1.0.2"
+    "use-sound": "^1.0.2",
+    "zustand": "^3.5.10"
   },
   "scripts": {
     "start": "react-scripts start",
