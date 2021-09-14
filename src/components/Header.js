@@ -3,17 +3,17 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
-  myTitle: {
-    fontFamily: "Covered By Your Grace, cursive",
-  },
+    myTitle: {
+        fontFamily: "Covered By Your Grace, cursive",
+    },
 });
-const Header = React.memo(function Header({ settings, setSettings }) {
-  const classes = useStyles();
-  return (
-    <Typography className={classes.myTitle} variant="h3">
-      Work
-    </Typography>
-  );
-});
+const Header = () => {
+    const classes = useStyles();
+    return (
+        <Typography className={classes.myTitle} variant="h3">
+            Work
+        </Typography>
+    );
+};
 
 export default Header;
