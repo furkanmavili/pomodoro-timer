@@ -1,97 +1,58 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import SettingsIcon from "@material-ui/icons/Settings";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import PrettoSlider from "./prettoSlider";
 import useSettings from "../hooks/useSettings";
-
-const useStyles = makeStyles((theme) => ({
-    modal: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        border: "2px solid #000",
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-        width: 500,
-    },
-    sliders: {
-        paddingTop: 30,
-        paddingBottom: 30,
-    },
-}));
+import { Drawer, FormControlLabel, Switch, Typography, Slider, IconButton, useMediaQuery } from "@mui/material";
+import { Box, useTheme } from "@mui/system";
+import CloseIcon from "@mui/icons-material/Close";
+import ThemeSwitcher from "./ThemeSwitcher";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function Settings() {
-    const classes = useStyles();
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("sm"))
     return (
         <>
-            <Button
+            <IconButton
                 variant="contained"
-                color="secondary"
-                className={classes.button}
-                startIcon={<SettingsIcon fontSize="large" />}
-                onClick={handleOpen}
+                onClick={() => setOpenDrawer(true)}
+                sx={{ position: "fixed", top: "10px", right: "10px", color: "rgba(255,255,255, .5)" }}
             >
-                Settings
-            </Button>
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
+                <SettingsIcon />
+            </IconButton>
+            <Drawer
+                anchor="right"
+                open={openDrawer}
+                onClose={() => setOpenDrawer(false)}
+                onOpen={() => setOpenDrawer(true)}
+                sx={{
+                    "& .MuiDrawer-paper": {
+                        width: matches ? 400 : "100%",
+                        backgroundImage: "none",
+                    },
                 }}
+                hideBackdrop
             >
-                <Fade in={open}>
-                    <div className={classes.paper}>
-                        <h2 id="transition-modal-title">Settings</h2>
-
-                        <div className={classes.sliders}>
-                            <Typography id="continuous-slider" gutterBottom>
-                                Pomodoro length
-                            </Typography>
-                            <Slider min={10} max={60} type="pomodoro" />
-                            <Typography id="continuous-slider" gutterBottom>
-                                Short break length
-                            </Typography>
-                            <Slider min={1} max={10} type="short" />
-                            <Typography id="continuous-slider" gutterBottom>
-                                Long break length
-                            </Typography>
-                            <Slider min={10} max={30} type="long" />
-                            <Checkbox />
-                        </div>
+                <Box px={theme.spacing(3)}>
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                        <h2>Settings</h2>
+                        <IconButton onClick={() => setOpenDrawer(false)}>
+                            <CloseIcon />
+                        </IconButton>
+                    </Box>
+                    <div>
+                        <CustomizedSlider label="Pomodoro Length" min={10} max={60} type="pomodoro" />
+                        <CustomizedSlider label="Short Break Length" min={1} max={10} type="short" />
+                        <CustomizedSlider label="Long Break Length" min={10} max={30} type="long" />
+                        <Checkbox />
                     </div>
-                </Fade>
-            </Modal>
+                    <ThemeSwitcher />
+                </Box>
+            </Drawer>
         </>
     );
 }
 
-function Slider({ min, max, type }) {
+function CustomizedSlider({ min, max, type, label }) {
     const state = useSettings((state) => state[type]);
     const setSetting = useSettings((state) => state.setSetting);
 
@@ -99,15 +60,18 @@ function Slider({ min, max, type }) {
         setSetting(type, value);
     };
     return (
-        <PrettoSlider
-            aria-label={type}
-            valueLabelDisplay="auto"
-            step={1}
-            min={min}
-            max={max}
-            value={state}
-            onChange={handleSliderChange}
-        />
+        <>
+            <Typography>{label}</Typography>
+            <Slider
+                aria-label={type}
+                valueLabelDisplay="auto"
+                step={1}
+                min={min}
+                max={max}
+                value={state}
+                onChange={handleSliderChange}
+            />
+        </>
     );
 }
 

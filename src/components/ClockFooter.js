@@ -1,7 +1,7 @@
 import React from "react";
+import { Button, ButtonGroup } from "@mui/material";
 import useSound from "use-sound";
 import buttonSound from "../sounds/button.mp3";
-import { Button } from "@material-ui/core";
 import useStore from "../hooks/useStore";
 
 function ClockFooter() {
@@ -13,9 +13,12 @@ function ClockFooter() {
         play();
     };
     return (
-        <Button variant="contained" color="primary" onClick={handleClick}>
-            {isCounting ? "Stop" : "Start"}
-        </Button>
+        <ButtonGroup sx={{ marginTop: 4 }} aria-label="timer buttons">
+            <Button sx={{ width: 75 }}>Restart</Button>
+            <Button sx={{ width: 75 }} variant="contained" color="primary" onClick={handleClick}>
+                {isCounting ? "Stop" : "Start"}
+            </Button>
+        </ButtonGroup>
     );
 }
 

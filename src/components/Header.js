@@ -1,16 +1,9 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { Typography } from "@mui/material";
 
-const useStyles = makeStyles({
-    myTitle: {
-        fontFamily: "Covered By Your Grace, cursive",
-    },
-});
 const Header = () => {
-    const classes = useStyles();
     return (
-        <Typography className={classes.myTitle} variant="h3">
+        <Typography variant="h3">
             Work
         </Typography>
     );

@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Typography } from "@material-ui/core";
+import useSound from "use-sound";
 import useStore from "../hooks/useStore";
 import { printableTime } from "../utils";
-import useSound from "use-sound";
 import bellSound from "../sounds/bell.mp3";
 import useInterval from "../hooks/useInterval";
 import useSettings from "../hooks/useSettings";
+import Progress from "./Progress";
 
-const useStyles = makeStyles({
-    clockText: {
-        fontFamily: "'Dosis', sans-serif",
-        textAlign: "center",
-        marginBottom: "20px",
-    },
-});
+
 function Counter() {
-    const classes = useStyles();
-    const [count, setCount] = useState(1500);
     const [initialTime, setInitialTime] = useState(0);
     const activeMode = useStore((state) => state.activeMode);
     const setActiveMode = useStore((state) => state.setActiveMode);
     const activeModeValue = useSettings((state) => state[activeMode]);
+    const [count, setCount] = useState(activeModeValue);
     const isCounting = useStore((state) => state.isCounting);
     const setIsCounting = useStore((state) => state.setIsCounting);
     const autoStart = useSettings((state) => state.autoStart);
     const [play] = useSound(bellSound);
+    const percent = ((initialTime - count) *  100) / initialTime
 
     useEffect(() => {
         setCount(activeModeValue * 60);
@@ -55,9 +48,7 @@ function Counter() {
     );
 
     return (
-        <Typography className={classes.clockText} variant="h1">
-            {printableTime(count)}
-        </Typography>
+        <Progress value={percent} print={printableTime(count)}/>
     );
 }
 
