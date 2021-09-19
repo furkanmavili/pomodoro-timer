@@ -1,16 +1,17 @@
 import React, { useMemo } from "react";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material";
-import useTheme from "./hooks/useTheme";
-import { getDesignTokens } from "./theme";
+import { Login } from "@mui/icons-material";
 import { styled } from "@mui/system";
-import MobileNavigation from "./components/MobileNavigation";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/home";
 import Tasks from "./pages/tasks";
 import Stats from "./pages/stats";
 import Profile from "./pages/profile";
 import NotFound from "./pages/error";
+import useTheme from "./hooks/useTheme";
+import { getDesignTokens } from "./theme";
+import MobileNavigation from "./components/MobileNavigation";
 
 const Wrapper = styled("div")(({ theme }) => ({
     backgroundColor: theme.palette.background,
@@ -41,6 +42,9 @@ function App() {
                         </Route>
                         <Route path="/profile" exact>
                             <Profile />
+                        </Route>
+                        <Route path="/login" exact>
+                            <Login />
                         </Route>
                         <Route path="/" exact render={() => <Redirect to="/home" />} />
                         <Route path="*">
