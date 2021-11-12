@@ -3,6 +3,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/system";
+import useStore from "../hooks/useStore";
 
 const StyledBox = styled(Box)(({ theme }) => ({
     position: "relative",
@@ -29,7 +30,16 @@ const StyledBox = styled(Box)(({ theme }) => ({
     },
 }));
 
+const sessionColors = {
+    "pomodoro": "primary",
+    "short": "secondary", 
+    "long": "info"
+}
+
 function Progress({ print, ...rest }) {
+    const queue = useStore(state => state.queue)
+    const progressColor = sessionColors[queue[0]] 
+    
     return (
         <StyledBox>
             <CircularProgress
@@ -37,6 +47,7 @@ function Progress({ print, ...rest }) {
                 variant="determinate"
                 size={300}
                 thickness={2}
+                color={progressColor}
                 {...rest}
             />
             <Box
