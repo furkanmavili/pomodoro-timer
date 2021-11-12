@@ -21,6 +21,29 @@ const StyledNavigation = styled(BottomNavigation)(({theme}) => ({
 
 }))
 
+const navigationConfig = [
+    {
+        label: "Pomodoro", 
+        value: "home",
+        icon: <TimerIcon />
+    }, 
+    {
+        label: "Tasks", 
+        value: "tasks",
+        icon: <AssignmentIcon />
+    }, 
+    {
+        label: "Stats", 
+        value: "stats",
+        icon: <BarChartIcon />
+    }, 
+    {
+        label: "Profile", 
+        value: "profile",
+        icon: <PersonIcon />
+    }
+]
+
 function MobileNavigation() {
     const location = useLocation()
     const currentTab = location.pathname.substring(1)
@@ -29,42 +52,17 @@ function MobileNavigation() {
     if (matches) return null;
     return (
         <StyledNavigation value={currentTab}>
-            <BottomNavigationAction
-                component={Link}
-                to="/home"
-                disableRipple
-                disableTouchRipple
-                label="Pomodoro"
-                value="home"
-                icon={<TimerIcon />}
-            />
-            <BottomNavigationAction
-                component={Link}
-                to="/tasks"
-                disableRipple
-                disableTouchRipple
-                label="Tasks"
-                value="tasks"
-                icon={<AssignmentIcon />}
-            />
-            <BottomNavigationAction
-                component={Link}
-                to="/stats"
-                disableRipple
-                disableTouchRipple
-                label="Stats"
-                value="stats"
-                icon={<BarChartIcon />}
-            />
-            <BottomNavigationAction
-                component={Link}
-                to="/profile"
-                disableRipple
-                disableTouchRipple
-                label="Profile"
-                value="profile"
-                icon={<PersonIcon />}
-            />
+            {navigationConfig.map(navigation => (
+                <BottomNavigationAction
+                    component={Link}
+                    to={`/${navigation.value}`}
+                    disableRipple
+                    disableTouchRipple
+                    label={navigation.label}
+                    value={navigation.value}
+                    icon={navigation.icon}
+                />
+            ))}
         </StyledNavigation>
     );
 }
