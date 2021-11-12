@@ -3,9 +3,9 @@ import create from "zustand";
 const useSettings = create((set) => ({
     sound: true,
     autoStart: false,
-    pomodoro: 0.1,
-    short: 0.05,
-    long: 0.05,
+    pomodoro: 25,
+    short: 5,
+    long: 15,
     setSetting: (key, value) => set((state) => ({ [key]: value })),
 }));
 export default useSettings;
