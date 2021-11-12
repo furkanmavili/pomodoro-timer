@@ -12,11 +12,14 @@ import NotFound from "./pages/error";
 import useTheme from "./hooks/useTheme";
 import { getDesignTokens } from "./theme";
 import MobileNavigation from "./components/MobileNavigation";
+import Footer from "./components/Footer";
+import Settings from "./components/Settings";
 
 const Wrapper = styled("div")(({ theme }) => ({
     backgroundColor: theme.palette.background,
     minHeight: "100vh",
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
 }));
@@ -53,6 +56,8 @@ function App() {
                     </Switch>
                     <MobileNavigation />
                 </Router>
+                <Settings />
+                <Footer />
             </Wrapper>
         </ThemeProvider>
     );
