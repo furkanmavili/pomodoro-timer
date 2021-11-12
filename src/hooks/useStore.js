@@ -1,9 +1,15 @@
 import create from "zustand";
 
+
+const initialQueue = ["pomodoro", "short", "pomodoro", "short", "pomodoro", "short", "pomodoro", "long"]
+
 const useStore = create((set) => ({
-    activeMode: "pomodoro",
+    queue: initialQueue,
     isCounting: false,
-    setActiveMode: (value) => set((state) => ({ activeMode: value })),
-    setIsCounting: (value) => set((state) => ({ isCounting: value })),
+    completed: false,
+    setIsCounting: (value) => set(state => ({isCounting: value})),
+    shiftQueue: () => set(state => ({ queue: state.queue.slice(1) })),
+    resetQueue: (value) => set((state) => ({ queue: [...initialQueue] })),
+    setCompleted: (value) =>set(() => ({completed: value}))
 }));
 export default useStore;
