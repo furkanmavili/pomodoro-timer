@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Stack } from "@mui/material";
-import useStore from "../hooks/useStore";
+import useStore from "../../hooks/useStore";
 
 const ClockHeader = () => {
     return (
